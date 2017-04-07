@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  cadvisor:
+    image: google/cadvisor:v0.25.0
+    restart: always
+    environment:
+      INFLUXDB_HOST: "${INFLUXDB_HOST}"
+      INFLUXDB_PORT: "${INFLUXDB_PORT}"
+    logging:
+      driver: syslog
+      options:
+        syslog-address: "${SYSLOG_ADDRESS}"
+    command: -storage_driver=influxdb -storage_driver_db=cadvisor -storage_driver_host=$INFLUXDB_HOST:$INFLUXDB_PORT
