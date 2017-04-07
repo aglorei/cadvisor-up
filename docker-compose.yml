@@ -4,6 +4,11 @@ services:
   cadvisor:
     image: google/cadvisor:v0.25.0
     restart: always
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
     environment:
       INFLUXDB_HOST: "${INFLUXDB_HOST}"
       INFLUXDB_PORT: "${INFLUXDB_PORT}"
